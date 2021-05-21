@@ -1,3 +1,6 @@
+/*  
+Merge-Sort algoritmo divide y vencerás. Divide el arreglo principal recursivamente en sub arreglos para ir obteniendo el menor valor de cada sub arreglo (índice) e ir posicionandolo 
+*/
 #include <iostream>
 #include <conio.h>
 
