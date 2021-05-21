@@ -1,0 +1,106 @@
+#include <iostream>
+#include <conio.h>
+
+using namespace std;
+
+typedef unsigned long ul;
+template <class T>
+
+class Sorting
+{
+	T* elementos;
+	int c;
+private:
+
+	void sortM(ul i, ul m, ul f) //Inicio Mitad Final
+	{
+		ul cant = f - i + 1;//Cantidad de elementos del sub arreglo
+		T* temp = new T[cant];//Se reserva un espacio para el sub arreglo
+		ul izquierda = i;
+		ul derecha = m + 1;
+		ul indice = 0;
+
+		while (izquierda <= m && derecha <= f)// Se tiene que volver a repetir siempre y cuando la izquierda es menor que la mitad y siempre cuando la derecha sea menor o igual que el final
+		{
+			if (elementos[izquierda] <= elementos[derecha]) {//Obtener frontal izquierda
+				//Si es que la izquierda es menor que la derecha se extrae el frontal (el menor de ellos)
+				temp[indice++] = elementos[izquierda++];
+				//++izquierda;//Si es menor se evalua el siguiente
+			}
+			else
+			{
+				//Si es que la derecha es menor que la izquierda se extrae el frontal de la derecha
+				temp[indice++] = elementos[derecha++];
+				//++derecha;
+			}
+			//++indice;//Una vez que se extrajo el indice se evalua el siguiente
+		}
+		//Seguir recorriendo hasta el final de los arreglos por la izquierda.
+		while (izquierda <= m) {
+			temp[indice++] = elementos[izquierda++];
+			//++izquierda;
+			//++indice;
+		}
+		//Seguir recorriendo hasta el final de los arreglos por la derecha.
+		while (derecha <= f)
+		{
+			temp[indice++] = elementos[derecha++];
+			//++derecha;
+			//++indice;
+		}
+		//Ya que todas las operaciones se han hecho con el arreglo temporal, se pasarn al arreglo original
+		for (ul l = 0; l < cant; l++)
+		{
+			elementos[l + i] = temp[l];//Se le suma la cantidad al inicio ya que como es recursivo en el temp se almacenan los sub arreglos pero ahora tiene que ordenar el arreglo completo que contiene los sub arreglos
+		}
+		delete[] temp;
+	}
+
+	void _mergesort(ul i, ul f) //Inicio Final 
+	{
+		if (i >= f) return;
+
+		ul indice = (i + f) / 2;//El índice es el pivote en Quicksort. Es la mitad
+		_mergesort(i, indice);//Ordenar por la izquierda
+		_mergesort(indice + 1, f);//Ordenar por la derecha
+		sortM(i, indice, f);
+	}
+ 
+
+
+public:
+	Sorting(int c) : c(c) {
+		elementos = new T[c];
+		generar();
+	};
+
+	void generar() {
+		for (int i = 0; i < c; i++)
+		{
+			elementos[i] = rand() % 100;
+		}
+	}
+
+	void mostrar() {
+		for (int i = 0; i < c; i++)
+		{
+			cout << elementos[i] << " ";
+		}
+		cout << endl;
+	}
+
+	void mergesort() {
+		_mergesort(0, c - 1);//Iniicio y final
+	}
+
+};
+
+int main()
+{
+	srand(time(0));
+	Sorting<long> s(10);
+	s.mostrar();
+	s.mergesort();
+	s.mostrar();
+	_getch();
+}
