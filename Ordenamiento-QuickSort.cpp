@@ -24,7 +24,7 @@ private:
 
 	ul _ordenar(ul i, ul d, ul p) {
 
-		while (i == p && d == p && i == d)
+		while (!(i == p && d == p && i == d))
 		{
 
 
