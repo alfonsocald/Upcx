@@ -32,7 +32,7 @@ private:
 			{
 				--d;
 			}
-			swap(elementos[d], elementos[p]);//Función de STD
+			swap(elementos[d], elementos[p]);//FunciÃ³n de STD
 
 			p = d; //actualiza la posicion del pivote
 
@@ -45,7 +45,7 @@ private:
 				++i;//La izquierda aumenta hasta que se iguale con la derecha y el pivote
 			}
 
-			swap(elementos[i], elementos[p]);//Función de STD
+			swap(elementos[i], elementos[p]);//FunciÃ³n de STD
 			p = i; //actualiza la posicion del pivote
 
 
